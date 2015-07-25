@@ -32,20 +32,36 @@
           if (scope.disabled) {
             return;
           }
-          var windowHeight = win[0].innerHeight;
-          var elementBottom = elem[0].getBoundingClientRect().bottom;
-          var windowBottom = windowHeight + (win[0].scrollY || win[0].pageYOffset);
-          var remaining = elementBottom - windowBottom;
-          var shouldGetMore = (remaining - parseInt(scope.distance || 0, 10) <= 0);
+
+          //this solution is not working in chrome maybe works in other browers,
+          //test is need it, depending how the test is going we can decide what approach to take
+          //depending browsers
+
+          //var windowHeight = win[0].innerHeight;
+          //var elementBottom = elem[0].getBoundingClientRect().bottom;
+          //var windowBottom = windowHeight + (win[0].scrollY || win[0].pageYOffset);
+          //var remaining = elementBottom - windowBottom;
+          var shouldGetMore;// = (remaining - parseInt(scope.distance || 0, 10) <= 0);
+
+          //other calculation this actually you have to arrive to the bottom;
+          //you have to reach the bottom to trigger the load data callback
+
+          var distance = parseInt(scope.distance || 0, 10) <= 0;
+          var documentHeight = (document.body.scrollHeight - distance);
+          var scrollHeight = ( (document.body.scrollTop + window.innerHeight) - distance);
+          if ( documentHeight == scrollHeight ) {
+            shouldGetMore = true;
+          }
 
           if (shouldGetMore) {
             $timeout(scope.callback);
           }
+
         };
 
         // Check immediately if we need more items upon reenabling.
         scope.$watch('disabled', function(isDisabled){
-            if (false === isDisabled) onScroll();
+          if (false === isDisabled) onScroll();
         });
 
         win.bind('scroll', onScroll);
