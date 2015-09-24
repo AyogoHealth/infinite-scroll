@@ -1,7 +1,7 @@
 {
   "name": "tagged-infinite-scroll",
   "main": "taggedInfiniteScroll.js",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "scripts": {},
   "devDependencies": {},
   "gitHead": "c3f167a3da8aae1efe5b350a37997b314a6b7b0f",
