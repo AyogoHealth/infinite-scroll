@@ -1,21 +1,9 @@
 /*! tagged-infinite-scroll - v1.1.0 - 2014-10-28 */
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(['angular'], factory);
-  } else if (typeof exports === 'object') {
-    // CommonJS
-    factory(exports, require('angular'));
-  } else {
-    // Browser globals
-    factory((root.taggedInfiniteScroll = {}), root.angular);
-  }
-}(this, function (exports, angular) {
-  "use strict";
 
+(function() {
   // Allows a container to support infinite scroll
   // Based on: http://binarymuse.github.io/ngInfiniteScroll/
-  var module = angular.module('tagged.directives.infiniteScroll', []);
+  var module = angular.module('tagged-infinite-scroll', []);
 
   module.directive('taggedInfiniteScroll', ['$window', '$timeout', function($window, $timeout) {
     return {
@@ -62,10 +50,11 @@
     };
   }]);
 
-  // Just return a value to define the module export.
-  // This example returns an object, but the module
-  // can return a function as the exported value.
 
-  exports.module = module;
-  return exports;
-}));
+})();
+
+// Just return a value to define the module export.
+// This example returns an object, but the module
+// can return a function as the exported value.
+
+module.exports = "tagged-infinite-scroll";
